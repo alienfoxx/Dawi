@@ -1,12 +1,12 @@
 import { generateToken } from "../lib/utils.js";
 import User from "../models/user.model.js";
 
-import bcryptjs from "bcryptjs";
+import bcrypt from "bcryptjs";
 
 export const signup = async (req, res) => {
   const { fullName, email, password } = req.body;
   try {
-    if ((!fullName, email, password)) {
+    if (!fullName ||!email || !password) {
       return res.status(400).json({ message: "All fields are required" });
     }
 
@@ -64,15 +64,18 @@ export const login = async (req, res) => {
 
     if (!isPasswordCorrect) {
       return res.status(400).json({ message: "Invalid credentials" });
+    }
+      generateToken(user._id, res);
+
       res.status(200).json({
-        _id: user.id,
+        _id: user._id,
         fullName: user.fullName,
         email: user.email,
         profilePic: user.profilePic,
       });
-    }
+    
 
-    generateToken(user._id, res);
+  
   } catch (error) {
     console.log("Error in login controller", error.message);
     res.status(500).json({ message: "Internal Server Error" });
@@ -80,7 +83,15 @@ export const login = async (req, res) => {
 };
 
 export const logout = (req, res) => {
-  res.send("logout router");
+  try {
+    res.cookie("jwt","",{maxAge:0})
+    res.status(200).json({message:"logged out successfully"});
+  } catch (error) {
+    console.log("Erorr in logout controller",error.message);
+    res.status(500).json({ message: "Internal Server Error" });
+    
+
+    
+  }
 };
 
-//42:14 test api with postman
