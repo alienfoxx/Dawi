@@ -55,10 +55,10 @@ export const sendMessage = async (req, res) => {
     });
 
     // realtime chat functionality
+    await newMessage.save();
 
     res.status(201).json(newMessage);
 
-    await newMessage.save();
   } catch (error) {
     console.log("Error in sendMessage controller:", error.message);
     res.status(500).json({ error: "Internal server error" });

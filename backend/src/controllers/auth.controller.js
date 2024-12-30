@@ -5,6 +5,7 @@ import cloudinary from "../lib/cloudinary.js";
 import bcrypt from "bcryptjs";
 
 export const signup = async (req, res) => {
+  console.log("Signup route hit")
   const { fullName, email, password } = req.body;
   try {
     if (!fullName || !email || !password) {
@@ -23,8 +24,8 @@ export const signup = async (req, res) => {
 
     // hash passwords
 
-    const salt = await bcryptjs.genSalt(10);
-    const hashedPassword = await bcryptjs.hash(password, salt);
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
 
     const newUser = new User({
       fullName,
@@ -33,6 +34,8 @@ export const signup = async (req, res) => {
     });
 
     if (newUser) {
+      // generate jwt token here
+      
       generateToken(newUser._id, res);
       await newUser.save();
 
