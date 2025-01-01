@@ -1,0 +1,13 @@
+{
+  "name": "dawi",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000D\u0000a\u0000w\u0000i\u0000\r\u0000 \u0000",
+  "main": "index.js",
+  "scripts": {
+    "build":"",
+    "start": ""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
