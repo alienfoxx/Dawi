@@ -5,7 +5,7 @@ import cloudinary from "../lib/cloudinary.js";
 import bcrypt from "bcryptjs";
 
 export const signup = async (req, res) => {
-  console.log("Signup route hit")
+  console.log("Signup route hit");
   const { fullName, email, password } = req.body;
   try {
     if (!fullName || !email || !password) {
@@ -35,7 +35,7 @@ export const signup = async (req, res) => {
 
     if (newUser) {
       // generate jwt token here
-      
+
       generateToken(newUser._id, res);
       await newUser.save();
 
@@ -118,14 +118,11 @@ export const updateProfile = async (req, res) => {
   }
 };
 
-export const checkAuth = (req,res) =>{
+export const checkAuth = (req, res) => {
   try {
     res.status(200).json(req.user);
-
   } catch (error) {
-    
     console.log("Error in chekAuth controller", error.message);
-    res.status(500).json({message:"Internal Server Error"});
+    res.status(500).json({ message: "Internal Server Error" });
   }
-
-}
+};

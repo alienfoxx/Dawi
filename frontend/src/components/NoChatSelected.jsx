@@ -1,5 +1,4 @@
-import { MessageSquare } from "lucide-react"
-
+import { MessageSquare } from "lucide-react";
 
 const NoChatSelected = () => {
   return (
@@ -24,7 +23,7 @@ const NoChatSelected = () => {
         </p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default NoChatSelected
+export default NoChatSelected;
